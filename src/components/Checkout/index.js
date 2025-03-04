@@ -12,18 +12,22 @@ const styles = {
   },
 };
 function Checkout({ history }) {
+
   const dispatch = useDispatch();
   const { current } = useSelector((state) => state.user);
+
   const [clientDetails, setClientDetails] = useState({
     givenName: current?.givenName,
     familyName: current?.familyName,
     email: current?.email,
   });
+
   const [required, setRequired] = useState({
     givenName: false,
     familyName: false,
     email: false,
   });
+
   const handleOnChange = (e) =>
     setClientDetails((prevState) => ({
       ...prevState,

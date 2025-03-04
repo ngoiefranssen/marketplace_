@@ -31,6 +31,7 @@ const STATUS = {
   CANCELLED: "cancelled",
   FAILED: "error",
 };
+
 function Payment({ history }) {
   const dispatch = useDispatch()
   const items = useSelector((state) => state.cart.items);
@@ -50,6 +51,7 @@ function Payment({ history }) {
       resolve(data);
     });
   };
+
   const addOrder = () => {
     console.dir(current)
     return new Promise((resolve) => {
@@ -67,6 +69,7 @@ function Payment({ history }) {
       resolve();
     });
   };
+
   const confirmOrder = () => {
     return new Promise((resolve) => {
       setStatus(STATUS.CONFIRMED);
@@ -88,21 +91,25 @@ function Payment({ history }) {
     await processPayment(payment);
     setStatus(STATUS.COMPLETE);
   };
+
   const onCancel = async (data) => {
     console.log("The payment was cancelled!", data);
     setStatus(STATUS.CANCELLED);
   };
+
   const onError = async (err) => {
     console.log("Error!", err);
   };
+
   useEffect(() => setValid(status === STATUS.COMPLETE), [status]);
+
   return (
     <section className="pt-5 pb-5">
       <div className="container">
         {/* Alert messages HERE */}
-        <Alert.Confirmed status={status === STATUS.CONFIRMED} />
-        <Alert.Cancelled status={status === STATUS.CANCELLED} />
-        <Alert.Error status={status === STATUS.FAILED} />
+        <Alert.Confirmed status={status === STATUS?.CONFIRMED} />
+        <Alert.Cancelled status={status === STATUS?.CANCELLED} />
+        <Alert.Error status={status === STATUS?.FAILED} />
         <div className="py-5 text-center row justify-content-center">
           <div className="col-md-10">
             <h2>Checkout</h2>
